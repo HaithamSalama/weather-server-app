@@ -8,6 +8,9 @@ let d = new Date();
 let newDate = d.getDate() + ' / ' + Number(d.getMonth() + 1) + ' / ' + d.getFullYear();
 console.log(newDate);
 
+// event listener for generate buttoon to generate data
+document.getElementById('generate').addEventListener('click', generateWeatherData);
+
 //function excuted when generate button clicked
 function generateWeatherData() {
 
@@ -66,18 +69,21 @@ const updateUI = async () => {
     try {
         //updating HTML elements with user & API data
         const allWeatherData = await req.json;
+        // document.getElementById('date').innerHTML =
+        //     `Date: ${allWeatherData[0].date}`;
+        // document.getElementById('temp').innerHTML =
+        //     `Temperature: ${allWeatherData[0].temperature} &#8457`;
+        // document.getElementById('fealing').innerHTML =
+        //     `You feal: ${allWeatherData[0].fealing}`
         document.getElementById('date').innerHTML =
-            `Date: ${allWeatherData[0].date}`;
+            `Date: ${allWeatherData.date}`;
         document.getElementById('temp').innerHTML =
-            `Temperature: ${allWeatherData[0].temperature} &#8457`;
+            `Temperature: ${allWeatherData.temperature} &#8457`;
         document.getElementById('fealing').innerHTML =
-            `You feal: ${allWeatherData[0].fealing}`
-}
+            `You feal: ${allWeatherData.fealing}`
+    }
     catch (err) {
-    // error log message reported in the console if it existed
-    console.log("err", err);
+        // error log message reported in the console if it existed
+        console.log("err", err);
+    }
 }
-}
-
-// event listener for generate buttoon to generate data
-document.getElementById('generate').addEventListener('click', generateWeatherData);

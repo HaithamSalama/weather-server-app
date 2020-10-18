@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-weatherData = [];
+weatherData = {};
 
 // Require Express to run server and routes
 const express = require('express');
@@ -28,7 +28,7 @@ const server = app.listen(port, () => {
 
 // GET route
 app.get('/allWeatherData', sendWeatherData);
-function sendWeatherData(req, res)  {
+function sendWeatherData(req, res) {
   console.log('GET request received');
   res.send(weatherData);
 }
@@ -36,11 +36,16 @@ function sendWeatherData(req, res)  {
 // POST route
 app.post('/addWeatherData', callBack)
 function callBack(req, res) {
-  let weatherData= {
-    date: req.body.date,
-    temp: req.body.temp,
-    fealnig: req.body.fealnig
-  }
-  addWeatherData.push(weatherData);
-  res.send(true);
+  console.log('POST request received');
+
+  // let weatherData= {
+  //   date: req.body.date,
+  //   temp: req.body.temp,
+  //   fealnig: req.body.fealnig
+  // }
+  // addWeatherData.push(weatherData);
+  weatherData['date'] = req.body.date;
+  weatherData['temp'] = req.body.temp;
+  weatherData['fealing'] = req.body.fealing;
+  res.send(weatherData);
 };
